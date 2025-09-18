@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitoria Benetto - OnlyFans</title>
+    <link rel="icon" type="image/jpeg" href="fiveicon.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="fiveicon.jpeg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+            min-height: 100vh;
+        }
+
+        .container { display: flex; min-height: 100vh; }
+
+        /* Sidebar - Hidden on mobile */
+        .sidebar {
+            width: 280px;
+            background: #ffffff;
+            border-right: 1px solid #e1e8ed;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #657786;
+            transition: all 0.2s;
+        }
+        .sidebar-item:hover { background: #f7f9fa; color: #000000; }
+        .sidebar-icon { width: 24px; height: 24px; margin-right: 16px; font-size: 20px; }
+
+        /* Main Content */
+        .main-content { 
+            width: 100%;
+            background: #ffffff;
+            margin-left: 0;
+        }
+
+        /* Header com foto de capa */
+        .profile-header {
+            position: relative;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .header-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .header-nav {
+            position: absolute; top: 16px; left: 16px; right: 16px;
+            display: flex; justify-content: space-between; align-items: center;
+            color: white;
+        }
+        .back-arrow { font-size: 20px; cursor: pointer; }
+        .header-icons { display: flex; gap: 16px; }
+        .header-icon { font-size: 20px; cursor: pointer; }
+        
+        .profile-overlay-info {
+            position: absolute; bottom: 16px; left: 16px; right: 16px; color: white;
+        }
+        .overlay-title { 
+            font-size: 18px; font-weight: 700; margin-bottom: 4px; 
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        .overlay-stats { 
+            font-size: 14px; opacity: 0.95; 
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Profile Section */
+        .profile-section { padding: 16px; position: relative; background: #ffffff; }
+        .profile-main { display: flex; gap: 16px; margin-bottom: 24px; }
+        .profile-avatar {
+            width: 70px; height: 70px; border-radius: 50%; border: 3px solid #ffffff;
+            margin-top: -35px; background-size: cover; background-position: center;
+            position: relative;
+        }
+        .online-indicator {
+            position: absolute; bottom: 2px; right: 2px;
+            width: 14px; height: 14px; background: #00d4aa;
+            border: 2px solid #ffffff; border-radius: 50%;
+        }
+        .profile-details { flex: 1; margin-top: 10px; }
+        .profile-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: #000000; }
+        .profile-username { color: #657786; margin-bottom: 4px; font-size: 14px; }
+        .profile-status { color: #00d4aa; font-size: 12px; margin-bottom: 12px; }
+        .profile-bio { margin-bottom: 12px; line-height: 1.5; color: #000000; font-size: 14px; }
+        .more-info-btn { color: #2F91EA; text-decoration: none; font-size: 14px; cursor: pointer; }
+        
+        /* Dropdown Info */
+        .more-info-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #f7f9fa;
+            border-radius: 8px;
+            margin-top: 12px;
+            border: 1px solid #e1e8ed;
+        }
+        .more-info-content.expanded {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .more-info-text {
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #000000;
+        }
+        .more-info-text p {
+            margin-bottom: 12px;
+        }
+        .more-info-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Subscription Section */
+        .subscription-section {
+            background: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 24px;
+            border: 1px solid #e1e8ed;
+        }
+        .subscription-header {
+            font-weight: 600; margin-bottom: 12px; color: #657786;
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .offer-banner {
+            background: linear-gradient(135deg, #2F91EA, #00d4aa); 
+            border-radius: 6px;
+            padding: 10px 12px; margin-bottom: 12px; color: #ffffff; font-weight: 500;
+            font-size: 13px;
+        }
+        .offer-details {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .offer-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #e1e8ed; background-size: cover; background-position: center;
+        }
+        .offer-text { flex: 1; font-size: 13px; line-height: 1.4; color: #000000; }
+        .subscribe-btn {
+            width: 100%; background: linear-gradient(135deg, #2F91EA, #1e6bb8); 
+            color: white; border: none;
+            padding: 12px 20px; border-radius: 25px; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 6px;
+        }
+        .subscribe-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(47, 145, 234, 0.3); }
+        .price-info { text-align: center; color: #657786; font-size: 11px; }
+
+        /* Content Tabs */
+        .content-tabs {
+            display: flex; border-bottom: 1px solid #e1e8ed; margin-bottom: 16px;
+        }
+        .tab {
+            flex: 1; text-align: center; padding: 12px 8px;
+            border-bottom: 2px solid transparent; cursor: pointer;
+            font-weight: 500; color: #657786; transition: all 0.2s;
+        }
+        .tab.active { color: #2F91EA; border-bottom-color: #2F91EA; }
+        .tab-count { display: block; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .tab-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 8px; padding: 0 16px 16px 16px;
+            background: #ffffff;
+        }
+        .content-item {
+            aspect-ratio: 1; background: #ffffff; border-radius: 8px;
+            position: relative; overflow: hidden; cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .content-item:hover { transform: scale(1.02); }
+        .content-image { width: 100%; height: 100%; object-fit: cover; }
+        .content-video { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: blur(6px); 
+        }
+        .content-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 600;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .content-item:hover .content-overlay { opacity: 1; }
+        .video-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; font-weight: 600; text-align: center;
+        }
+        .play-icon {
+            font-size: 32px; margin-bottom: 6px; opacity: 0.9;
+        }
+        .video-text {
+            font-size: 11px; padding: 0 12px;
+        }
+
+        /* Lock icon for premium content */
+        .lock-icon {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(0, 0, 0, 0.7); border-radius: 12px;
+            padding: 4px 6px; font-size: 12px;
+        }
+
+        /* Modal/Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .modal-header {
+            position: relative;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+        }
+        .modal-header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .modal-profile {
+            position: absolute;
+            bottom: -30px;
+            left: 20px;
+            display: flex;
+            align-items: end;
+            gap: 12px;
+        }
+        .modal-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .modal-online {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #00d4aa;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+        }
+        .modal-info {
+            color: white;
+            margin-bottom: 12px;
+        }
+        .modal-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        .modal-username {
+            font-size: 12px;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        .modal-body {
+            padding: 50px 20px 20px 20px;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8b95a1;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-benefits {
+            margin-bottom: 24px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .benefit-check {
+            color: #2F91EA;
+            font-size: 20px;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        .benefit-text {
+            color: #000000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .modal-add-funds-btn {
+            width: 100%;
+            background: #2F91EA;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        .modal-add-funds-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(47, 145, 234, 0.3);
+        }
+        .modal-close {
+            color: #2F91EA;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Desktop adaptations */
+        @media (min-width: 768px) {
+            .sidebar { display: block; }
+            .main-content { margin-left: 280px; max-width: 600px; }
+            .content-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .profile-header { height: 250px; }
+        }
+
+        @media (min-width: 1200px) {
+            .content-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="#" class="sidebar-item"><span class="sidebar-icon">👤</span><span>Perfil</span></a>
+            <a href="#" class="sidebar-item"><span class="sidebar-icon">🏠</span><span>Início</span></a>
+            <a href="#" class="sidebar-item"><span class="sidebar-icon">💬</span><span>Mensagens</span></a>
+            <a href="#" class="sidebar-item"><span class="sidebar-icon">🔔</span><span>Notificações</span></a>
+            <a href="#" class="sidebar-item"><span class="sidebar-icon">⭐</span><span>Favoritos</span></a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header com foto de capa -->
+            <div class="profile-header" style="background: url(capa.jpeg) center/cover no-repeat;">
+                <div class="header-overlay"></div>
+                <div class="header-nav">
+                    <div class="back-arrow">←</div>
+                    <div class="header-icons">
+                        <div class="header-icon">⚙️</div>
+                        <div class="header-icon">⋯</div>
+                    </div>
+                </div>
+                <div class="profile-overlay-info">
+                    <div class="overlay-title">Vitoria Benetto 🏆 RATED #1 ON OF...</div>
+                    <div class="overlay-stats">1.1K Publicações • 78.5K Curtir</div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="profile-main">
+                    <div class="profile-avatar" style="background: url(perfil.jpeg) center/cover no-repeat;">
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="profile-details">
+                        <h1 class="profile-name">Vitoria Benetto</h1>
+                        <div class="profile-username">@vleticia01</div>
+                        <div class="profile-status">Online agora</div>
+                        <div class="profile-bio">
+                            ***🏆RAINHA DO ANAL🏆*** Bem-vindo ao paraíso na terra ✨<br>
+                            **XXX NO MEU FEED DO ONLYFANS!**
+                        </div>
+                        <a href="#" class="more-info-btn" onclick="toggleMoreInfo()">Mais informações</a>
+                        <div class="more-info-content" id="moreInfoContent">
+                            <div class="more-info-text">
+                                <p>⭐️🌈 Eu também adoro transar e ficar safada 😋 O que me deixar com mais tesão é chupar sua rolar e depois sentir ela pulsar no meu cuzinho. Você não sabe o quanto eu amo isso .</p>
+                                <p>Aqui você encontra meu conteúdo ***XXX*** mais exclusivo! 🥵</p>
+                                <p>Mal posso esperar para ficar safada com você. Quando você se inscrever, me conte seu **fetiche**, não importa o quão selvagem seja! 😈</p>
+                                <p>Inscreva-se na minha página e venha ser meu fiel puto. eu Quero sentir seu leite escorrendo na minha boca e depois no meu cuzinho, só de imaginar fico com muito tesão 👇 DESCONTO pela próxima hora.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Section -->
+                <div class="subscription-section">
+                    <div class="subscription-header">SUBSCRIÇÃO</div>
+                    <div class="offer-banner">🔥 Oferta limitada - 90% de desconto!</div>
+                    <div class="offer-details">
+                        <div class="offer-avatar" style="background: url(perfil.jpeg) center/cover no-repeat;"></div>
+                        <div class="offer-text">
+                            não é minha culpa se você perder 😭 restam poucas vagas
+                        </div>
+                    </div>
+                    <button class="subscribe-btn" onclick="handleSubscribe()">INSCREVER-SE • € 19,90 por 30 dias</button>
+                    <button class="subscribe-btn" onclick="handleSubscribe60()">INSCREVER-SE • € 29,90 por 60 dias</button>
+                    <button class="subscribe-btn" onclick="handleSubscribe90()">INSCREVER-SE • € 59,90 por 90 dias</button>
+                    <div class="price-info">Preço normal € 50 / mês</div>
+                </div>
+
+                <!-- Content Tabs -->
+                <div class="content-tabs">
+                    <div class="tab active"><span class="tab-count">1109</span><span class="tab-label">POSTAGENS</span></div>
+                    <div class="tab"><span class="tab-count">597</span><span class="tab-label">VÍDEOS</span></div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="content-grid" id="posts-grid">
+                    <div class="content-item">
+                        <img src="1.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="content-item">
+                        <img src="2.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="content-item">
+                        <img src="3.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="content-item">
+                        <img src="4.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="content-item">
+                        <img src="5.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                    <div class="content-item">
+                        <img src="6.jpeg" alt="" class="content-image">
+                        <div class="lock-icon">🔒</div>
+                    </div>
+                </div>
+
+                <!-- Videos Grid -->
+                <div class="content-grid" id="videos-grid" style="display: none;">
+                    <div class="content-item">
+                        <img src="1.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <img src="2.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <img src="3.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <img src="4.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <img src="5.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <img src="6.jpeg" alt="" class="content-video">
+                        <div class="video-overlay">
+                            <div class="play-icon">▶️</div>
+                            <div class="video-text">Apenas para assinantes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Adicionar Fundos -->
+    <div id="addFundsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" style="background: url(capa.jpeg) center/cover no-repeat;">
+                <div class="modal-header-overlay"></div>
+                <div class="modal-profile">
+                    <div class="modal-avatar" style="background: url(perfil.jpeg) center/cover no-repeat;">
+                        <div class="modal-online"></div>
+                    </div>
+                    <div class="modal-info">
+                        <div class="modal-name">Vitoria Benetto 🏆 RATED ...</div>
+                        <div class="modal-username">@vleticia01</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-title">SUBSCREVA E OBTENHA ESTES BENEFÍCIOS:</div>
+                <div class="modal-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">Acesso total ao conteúdo deste usuário</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">Mensagem direta com este usuário</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">Cancele sua assinatura a qualquer momento</span>
+                    </div>
+                </div>
+                <button class="modal-add-funds-btn" id="addFundsBtn">ADICIONE FUNDOS À SUA CONTA</button>
+                <div class="modal-close" onclick="closeModal()">FECHAR</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPlan = '';
+        let checkoutUrls = {
+            '30': 'https://buy.stripe.com/4gMbJ3ak68pm3lcdBf6g80A',
+            '60': 'https://buy.stripe.com/00wdRbcsebByf3U1Sx6g80B', 
+            '90': 'https://buy.stripe.com/9B614peAm9tq1d468N6g80C'
+        };
+
+        function handleSubscribe() {
+            currentPlan = '30';
+            showModal();
+        }
+
+        function handleSubscribe60() {
+            currentPlan = '60';
+            showModal();
+        }
+
+        function handleSubscribe90() {
+            currentPlan = '90';
+            showModal();
+        }
+
+        function showModal() {
+            const modal = document.getElementById('addFundsModal');
+            modal.style.display = 'block';
+            
+            const addFundsBtn = document.getElementById('addFundsBtn');
+            addFundsBtn.onclick = function() {
+                window.open(checkoutUrls[currentPlan], '_blank');
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('addFundsModal').style.display = 'none';
+        }
+
+        // Fechar modal clicando fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('addFundsModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        function toggleMoreInfo() {
+            const content = document.getElementById('moreInfoContent');
+            const btn = document.querySelector('.more-info-btn');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                btn.textContent = 'Mais informações';
+            } else {
+                content.classList.add('expanded');
+                btn.textContent = 'Menos informações';
+            }
+        }
+
+        document.querySelectorAll('.tab').forEach((tab, index) => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const postsGrid = document.getElementById('posts-grid');
+                const videosGrid = document.getElementById('videos-grid');
+                
+                if (index === 0) {
+                    postsGrid.style.display = 'grid';
+                    videosGrid.style.display = 'none';
+                } else {
+                    postsGrid.style.display = 'none';
+                    videosGrid.style.display = 'grid';
+                }
+            });
+        });
+
+        document.querySelectorAll('.content-item').forEach(item => {
+            item.addEventListener('click', function() {
+                alert('Conteúdo disponível apenas para assinantes!');
+            });
+        });
+    </script>
+</body>
+</html>
