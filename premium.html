@@ -213,6 +213,40 @@
             box-shadow: 0 6px 16px rgba(47, 145, 234, 0.4);
         }
 
+        /* Pagination */
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .pagination-btn {
+            background: #2F91EA;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination-btn:hover {
+            background: #1e6bb8;
+            transform: translateY(-1px);
+        }
+        .pagination-btn:disabled {
+            background: #e1e8ed;
+            color: #657786;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .page-info {
+            font-size: 14px;
+            color: #657786;
+            font-weight: 500;
+        }
+
         /* Desktop adaptations */
         @media (min-width: 768px) {
             .sidebar { display: block; }
@@ -290,70 +324,25 @@
 
                 <!-- Content Tabs -->
                 <div class="content-tabs">
-                    <div class="tab active"><span class="tab-count">1109</span><span class="tab-label">POSTAGENS</span></div>
-                    <div class="tab"><span class="tab-count">597</span><span class="tab-label">VÍDEOS</span></div>
+                    <div class="tab active"><span class="tab-count">85</span><span class="tab-label">FOTOS</span></div>
+                    <div class="tab"><span class="tab-count">31</span><span class="tab-label">VÍDEOS</span></div>
                 </div>
 
-                <!-- Content Grid - Desbloqueado -->
-                <div class="content-grid" id="posts-grid">
-                    <div class="content-item">
-                        <img src="1.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="2.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="3.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="4.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="5.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="6.jpeg" alt="" class="content-image">
-                        <div class="premium-badge">PREMIUM</div>
-                    </div>
+                <!-- Pagination Controls -->
+                <div class="pagination-controls" style="text-align: center; margin-bottom: 16px;">
+                    <button id="prevBtn" class="pagination-btn">← Anterior</button>
+                    <span id="pageInfo" class="page-info">Página 1 de 5</span>
+                    <button id="nextBtn" class="pagination-btn">Próxima →</button>
                 </div>
 
-                <!-- Videos Grid - Desbloqueado -->
+                <!-- Content Grid - Fotos -->
+                <div class="content-grid" id="photos-grid">
+                    <!-- Fotos serão carregadas dinamicamente -->
+                </div>
+
+                <!-- Content Grid - Vídeos -->
                 <div class="content-grid" id="videos-grid" style="display: none;">
-                    <div class="content-item">
-                        <img src="1.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="2.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="3.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="4.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="5.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
-                    <div class="content-item">
-                        <img src="6.jpeg" alt="" class="content-video">
-                        <button class="play-button">▶</button>
-                        <div class="premium-badge">HD</div>
-                    </div>
+                    <!-- Vídeos serão carregados dinamicamente -->
                 </div>
             </div>
         </div>
@@ -363,12 +352,19 @@
     <button class="chat-button" onclick="openChat()">💬 Enviar Mensagem Privada</button>
 
     <script>
+        // Configurações
+        const PHOTOS_TOTAL = 85;
+        const VIDEOS_TOTAL = 31;
+        const ITEMS_PER_PAGE = 20;
+        
+        let currentPage = 1;
+        let currentTab = 'photos'; // 'photos' ou 'videos'
+
         function openChat() {
             alert('Redirecionando para o chat privado...\n\nAqui você pode configurar um link para WhatsApp, Telegram ou sistema de chat.');
         }
 
         function openImageModal(imageSrc) {
-            // Criar modal para exibir imagem em tela cheia
             const modal = document.createElement('div');
             modal.style.cssText = `
                 position: fixed;
@@ -395,47 +391,134 @@
             modal.appendChild(img);
             document.body.appendChild(modal);
             
-            // Fechar modal ao clicar
             modal.addEventListener('click', () => {
                 document.body.removeChild(modal);
             });
         }
+
+        function loadPhotos(page = 1) {
+            const grid = document.getElementById('photos-grid');
+            const startIndex = (page - 1) * ITEMS_PER_PAGE + 1;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, PHOTOS_TOTAL);
+            
+            grid.innerHTML = '';
+            
+            for (let i = startIndex; i <= endIndex; i++) {
+                const item = document.createElement('div');
+                item.className = 'content-item';
+                item.innerHTML = `
+                    <img src="fotos/foto${i}.png" alt="Foto ${i}" class="content-image" onerror="this.onerror=null; this.src='fotos/foto${i}.jpg';">
+                    <div class="premium-badge">FOTO</div>
+                `;
+                
+                item.addEventListener('click', function() {
+                    const img = this.querySelector('img');
+                    openImageModal(img.src);
+                });
+                
+                grid.appendChild(item);
+            }
+            
+            updatePagination();
+        }
+
+        function loadVideos(page = 1) {
+            const grid = document.getElementById('videos-grid');
+            const startIndex = (page - 1) * ITEMS_PER_PAGE + 1;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, VIDEOS_TOTAL);
+            
+            grid.innerHTML = '';
+            
+            for (let i = startIndex; i <= endIndex; i++) {
+                const item = document.createElement('div');
+                item.className = 'content-item';
+                item.innerHTML = `
+                    <img src="videos/video${i}.jpeg" alt="Vídeo ${i}" class="content-video" onerror="this.onerror=null; this.src='videos/video${i}.jpg';">
+                    <button class="play-button">▶</button>
+                    <div class="premium-badge">HD</div>
+                `;
+                
+                const playBtn = item.querySelector('.play-button');
+                playBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Tentar abrir o vídeo .mp4 correspondente
+                    const videoUrl = `videos/video${i}.mp4`;
+                    window.open(videoUrl, '_blank');
+                });
+                
+                item.addEventListener('click', function() {
+                    const img = this.querySelector('img');
+                    openImageModal(img.src);
+                });
+                
+                grid.appendChild(item);
+            }
+            
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const total = currentTab === 'photos' ? PHOTOS_TOTAL : VIDEOS_TOTAL;
+            const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+            
+            document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages}`;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            const total = currentTab === 'photos' ? PHOTOS_TOTAL : VIDEOS_TOTAL;
+            const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+            
+            if (direction === 'next' && currentPage < totalPages) {
+                currentPage++;
+            } else if (direction === 'prev' && currentPage > 1) {
+                currentPage--;
+            }
+            
+            if (currentTab === 'photos') {
+                loadPhotos(currentPage);
+            } else {
+                loadVideos(currentPage);
+            }
+        }
+
+        // Event listeners
+        document.getElementById('prevBtn').addEventListener('click', () => changePage('prev'));
+        document.getElementById('nextBtn').addEventListener('click', () => changePage('next'));
 
         document.querySelectorAll('.tab').forEach((tab, index) => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                const postsGrid = document.getElementById('posts-grid');
+                const photosGrid = document.getElementById('photos-grid');
                 const videosGrid = document.getElementById('videos-grid');
+                const paginationControls = document.querySelector('.pagination-controls');
+                
+                currentPage = 1; // Reset para primeira página
                 
                 if (index === 0) {
-                    postsGrid.style.display = 'grid';
+                    // Aba Fotos
+                    currentTab = 'photos';
+                    photosGrid.style.display = 'grid';
                     videosGrid.style.display = 'none';
+                    paginationControls.style.display = 'flex';
+                    loadPhotos(1);
                 } else {
-                    postsGrid.style.display = 'none';
+                    // Aba Vídeos
+                    currentTab = 'videos';
+                    photosGrid.style.display = 'none';
                     videosGrid.style.display = 'grid';
+                    paginationControls.style.display = 'flex';
+                    loadVideos(1);
                 }
             });
         });
 
-        document.querySelectorAll('.content-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const img = this.querySelector('.content-image, .content-video');
-                if (img) {
-                    openImageModal(img.src);
-                }
-            });
-        });
-
-        document.querySelectorAll('.play-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const img = this.parentElement.querySelector('.content-video');
-                if (img) {
-                    openImageModal(img.src);
-                }
-            });
+        // Carregar fotos inicialmente
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPhotos(1);
         });
     </script>
 </body>
