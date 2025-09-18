@@ -325,7 +325,7 @@
                 <!-- Content Tabs -->
                 <div class="content-tabs">
                     <div class="tab active"><span class="tab-count">85</span><span class="tab-label">FOTOS</span></div>
-                    <div class="tab"><span class="tab-count">31</span><span class="tab-label">VÍDEOS</span></div>
+                    <div class="tab"><span class="tab-count">39</span><span class="tab-label">VÍDEOS</span></div>
                 </div>
 
                 <!-- Pagination Controls -->
@@ -354,7 +354,7 @@
     <script>
         // Configurações
         const PHOTOS_TOTAL = 85;
-        const VIDEOS_TOTAL = 31;
+        const VIDEOS_TOTAL = 39;
         const ITEMS_PER_PAGE = 20;
         
         let currentPage = 1;
@@ -407,7 +407,7 @@
                 const item = document.createElement('div');
                 item.className = 'content-item';
                 item.innerHTML = `
-                    <img src="fotos/foto${i}.png" alt="Foto ${i}" class="content-image" onerror="this.onerror=null; this.src='fotos/foto${i}.jpg';">
+                    <img src="Fotos leticia benetto/foto${i}.png" alt="Foto ${i}" class="content-image" onerror="this.onerror=null; this.src='Fotos leticia benetto/foto${i}.jpg';">
                     <div class="premium-badge">FOTO</div>
                 `;
                 
@@ -433,7 +433,7 @@
                 const item = document.createElement('div');
                 item.className = 'content-item';
                 item.innerHTML = `
-                    <img src="videos/video${i}.jpeg" alt="Vídeo ${i}" class="content-video" onerror="this.onerror=null; this.src='videos/video${i}.jpg';">
+                    <img src="Videos leticia benetto/video${i}.jpeg" alt="Vídeo ${i}" class="content-video" onerror="this.onerror=null; this.src='Videos leticia benetto/video${i}.jpg';">
                     <button class="play-button">▶</button>
                     <div class="premium-badge">HD</div>
                 `;
@@ -442,7 +442,7 @@
                 playBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     // Tentar abrir o vídeo .mp4 correspondente
-                    const videoUrl = `videos/video${i}.mp4`;
+                    const videoUrl = `Videos leticia benetto/video${i}.mp4`;
                     window.open(videoUrl, '_blank');
                 });
                 
