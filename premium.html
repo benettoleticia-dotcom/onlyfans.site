@@ -8,7 +8,6 @@
     <link rel="shortcut icon" type="image/jpeg" href="fiveicon.jpeg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             background-color: #ffffff;
@@ -16,123 +15,62 @@
             line-height: 1.4;
             min-height: 100vh;
         }
-
         .container { display: flex; min-height: 100vh; }
-
-        /* Sidebar - Hidden on mobile */
         .sidebar {
-            width: 280px;
-            background: #ffffff;
-            border-right: 1px solid #e1e8ed;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            display: none;
+            width: 280px; background: #ffffff; border-right: 1px solid #e1e8ed;
+            padding: 20px 0; position: fixed; height: 100vh; overflow-y: auto; display: none;
         }
-
         .sidebar-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 24px;
-            text-decoration: none;
-            color: #657786;
-            transition: all 0.2s;
+            display: flex; align-items: center; padding: 12px 24px;
+            text-decoration: none; color: #657786; transition: all 0.2s;
         }
         .sidebar-item:hover { background: #f7f9fa; color: #000000; }
         .sidebar-icon { width: 24px; height: 24px; margin-right: 16px; font-size: 20px; }
-
-        /* Main Content */
-        .main-content { 
-            width: 100%;
-            background: #ffffff;
-            margin-left: 0;
-        }
-
-        /* Header com foto de capa */
+        .main-content { width: 100%; background: #ffffff; margin-left: 0; }
         .profile-header {
-            position: relative;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
+            position: relative; height: 200px;
+            background: url(capa.jpeg) center/cover no-repeat;
         }
-        .header-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-        }
+        .header-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); }
         .header-nav {
             position: absolute; top: 16px; left: 16px; right: 16px;
-            display: flex; justify-content: space-between; align-items: center;
-            color: white;
+            display: flex; justify-content: space-between; align-items: center; color: white;
         }
         .back-arrow { font-size: 20px; cursor: pointer; }
         .header-icons { display: flex; gap: 16px; }
         .header-icon { font-size: 20px; cursor: pointer; }
-        
         .profile-overlay-info {
             position: absolute; bottom: 16px; left: 16px; right: 16px; color: white;
         }
-        .overlay-title { 
-            font-size: 18px; font-weight: 700; margin-bottom: 4px; 
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        }
-        .overlay-stats { 
-            font-size: 14px; opacity: 0.95; 
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Welcome Message */
+        .overlay-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
+        .overlay-stats { font-size: 14px; opacity: 0.95; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
         .welcome-message {
             background: linear-gradient(135deg, #2F91EA, #00d4aa);
-            color: white;
-            padding: 16px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 16px;
+            color: white; padding: 16px; text-align: center; font-weight: 600; font-size: 16px;
         }
-
-        /* Profile Section */
         .profile-section { padding: 16px; position: relative; background: #ffffff; }
         .profile-main { display: flex; gap: 16px; margin-bottom: 24px; }
         .profile-avatar {
             width: 70px; height: 70px; border-radius: 50%; border: 3px solid #ffffff;
-            margin-top: -35px; background-size: cover; background-position: center;
-            position: relative;
+            margin-top: -35px; background: url(perfil.jpeg) center/cover no-repeat; position: relative;
         }
         .online-indicator {
-            position: absolute; bottom: 2px; right: 2px;
-            width: 14px; height: 14px; background: #00d4aa;
-            border: 2px solid #ffffff; border-radius: 50%;
+            position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px;
+            background: #00d4aa; border: 2px solid #ffffff; border-radius: 50%;
         }
         .profile-details { flex: 1; margin-top: 10px; }
         .profile-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: #000000; }
         .profile-username { color: #657786; margin-bottom: 4px; font-size: 14px; }
         .profile-status { color: #00d4aa; font-size: 12px; margin-bottom: 12px; }
         .profile-bio { margin-bottom: 12px; line-height: 1.5; color: #000000; font-size: 14px; }
-
-        /* Exclusive Content Section */
         .exclusive-content {
-            background: #f7f9fa;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 24px;
-            border: 1px solid #e1e8ed;
+            background: #f7f9fa; border-radius: 8px; padding: 16px; margin-bottom: 24px; border: 1px solid #e1e8ed;
         }
         .exclusive-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2F91EA;
-            margin-bottom: 12px;
-            text-align: center;
+            font-size: 18px; font-weight: 700; color: #2F91EA;
+            margin-bottom: 12px; text-align: center;
         }
-        .exclusive-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #000000;
-            text-align: center;
-        }
-
-        /* Content Tabs */
+        .exclusive-text { font-size: 14px; line-height: 1.6; color: #000000; text-align: center; }
         .content-tabs {
             display: flex; border-bottom: 1px solid #e1e8ed; margin-bottom: 16px;
         }
@@ -144,117 +82,56 @@
         .tab.active { color: #2F91EA; border-bottom-color: #2F91EA; }
         .tab-count { display: block; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
         .tab-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* Content Grid */
         .content-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 8px; padding: 0 16px 16px 16px;
-            background: #ffffff;
+            gap: 8px; padding: 0 16px 16px 16px; background: #ffffff;
         }
         .content-item {
             aspect-ratio: 1; background: #ffffff; border-radius: 8px;
             position: relative; overflow: hidden; cursor: pointer;
-            transition: transform 0.2s;
-            border: 2px solid #2F91EA;
+            transition: transform 0.2s; border: 2px solid #2F91EA;
         }
         .content-item:hover { transform: scale(1.02); }
-        .content-image { width: 100%; height: 100%; object-fit: cover; }
-        .content-video { 
-            width: 100%; height: 100%; object-fit: cover; 
-        }
-
-        /* Premium Badge */
+        .content-image, .content-video { width: 100%; height: 100%; object-fit: cover; }
         .premium-badge {
             position: absolute; top: 8px; right: 8px;
             background: linear-gradient(135deg, #2F91EA, #00d4aa);
             color: white; border-radius: 12px;
             padding: 4px 8px; font-size: 10px; font-weight: 600;
         }
-
-        /* Video Play Button */
         .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(47, 145, 234, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 20px;
-            cursor: pointer;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(47, 145, 234, 0.9); color: white; border: none;
+            border-radius: 50%; width: 48px; height: 48px; font-size: 20px; cursor: pointer;
             transition: all 0.2s;
         }
-        .play-button:hover {
-            background: #2F91EA;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        /* Chat Button */
+        .play-button:hover { background: #2F91EA; transform: translate(-50%, -50%) scale(1.1); }
         .chat-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+            position: fixed; bottom: 20px; right: 20px;
             background: linear-gradient(135deg, #2F91EA, #00d4aa);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(47, 145, 234, 0.3);
-            transition: all 0.2s;
+            color: white; border: none; border-radius: 50px; padding: 12px 20px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(47, 145, 234, 0.3); transition: all 0.2s;
         }
-        .chat-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(47, 145, 234, 0.4);
-        }
-
-        /* Pagination */
+        .chat-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(47, 145, 234, 0.4); }
         .pagination-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin: 16px 0;
+            display: flex; align-items: center; justify-content: center; gap: 16px; margin: 16px 0;
         }
         .pagination-btn {
-            background: #2F91EA;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
+            background: #2F91EA; color: white; border: none; padding: 8px 16px;
+            border-radius: 20px; font-size: 14px; cursor: pointer; transition: all 0.2s;
         }
-        .pagination-btn:hover {
-            background: #1e6bb8;
-            transform: translateY(-1px);
-        }
+        .pagination-btn:hover { background: #1e6bb8; transform: translateY(-1px); }
         .pagination-btn:disabled {
-            background: #e1e8ed;
-            color: #657786;
-            cursor: not-allowed;
-            transform: none;
+            background: #e1e8ed; color: #657786; cursor: not-allowed; transform: none;
         }
-        .page-info {
-            font-size: 14px;
-            color: #657786;
-            font-weight: 500;
-        }
-
-        /* Desktop adaptations */
+        .page-info { font-size: 14px; color: #657786; font-weight: 500; }
         @media (min-width: 768px) {
             .sidebar { display: block; }
             .main-content { margin-left: 280px; max-width: 600px; }
             .content-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .profile-header { height: 250px; }
         }
-
         @media (min-width: 1200px) {
             .content-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -262,7 +139,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <a href="#" class="sidebar-item"><span class="sidebar-icon">👤</span><span>Perfil</span></a>
             <a href="#" class="sidebar-item"><span class="sidebar-icon">🏠</span><span>Início</span></a>
@@ -271,15 +147,12 @@
             <a href="#" class="sidebar-item"><span class="sidebar-icon">⭐</span><span>Favoritos</span></a>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <!-- Welcome Message -->
             <div class="welcome-message">
                 🎉 Bem-vindo(a) ao conteúdo Premium! Obrigado por se inscrever! 🎉
             </div>
 
-            <!-- Header com foto de capa -->
-            <div class="profile-header" style="background: url(capa.jpeg) center/cover no-repeat;">
+            <div class="profile-header">
                 <div class="header-overlay"></div>
                 <div class="header-nav">
                     <div class="back-arrow">←</div>
@@ -294,12 +167,9 @@
                 </div>
             </div>
 
-            <!-- Profile Section -->
             <div class="profile-section">
                 <div class="profile-main">
-                    <div class="profile-avatar" style="background: url(perfil.jpeg) center/cover no-repeat;">
-                        <div class="online-indicator"></div>
-                    </div>
+                    <div class="profile-avatar"><div class="online-indicator"></div></div>
                     <div class="profile-details">
                         <h1 class="profile-name">Vitoria Benetto</h1>
                         <div class="profile-username">@vleticia01</div>
@@ -312,7 +182,6 @@
                     </div>
                 </div>
 
-                <!-- Exclusive Content Message -->
                 <div class="exclusive-content">
                     <div class="exclusive-title">🔓 CONTEÚDO PREMIUM DESBLOQUEADO</div>
                     <div class="exclusive-text">
@@ -322,103 +191,69 @@
                     </div>
                 </div>
 
-                <!-- Content Tabs -->
                 <div class="content-tabs">
                     <div class="tab active"><span class="tab-count">86</span><span class="tab-label">FOTOS</span></div>
                     <div class="tab"><span class="tab-count">39</span><span class="tab-label">VÍDEOS</span></div>
                 </div>
 
-                <!-- Pagination Controls -->
                 <div class="pagination-controls" style="text-align: center; margin-bottom: 16px;">
                     <button id="prevBtn" class="pagination-btn">← Anterior</button>
                     <span id="pageInfo" class="page-info">Página 1 de 5</span>
                     <button id="nextBtn" class="pagination-btn">Próxima →</button>
                 </div>
 
-                <!-- Content Grid - Fotos -->
-                <div class="content-grid" id="photos-grid">
-                    <!-- Fotos serão carregadas dinamicamente -->
-                </div>
-
-                <!-- Content Grid - Vídeos -->
-                <div class="content-grid" id="videos-grid" style="display: none;">
-                    <!-- Vídeos serão carregados dinamicamente -->
-                </div>
+                <div class="content-grid" id="photos-grid"></div>
+                <div class="content-grid" id="videos-grid" style="display: none;"></div>
             </div>
         </div>
     </div>
 
-    <!-- Chat Button -->
     <button class="chat-button" onclick="openChat()">💬 Enviar Mensagem Privada</button>
 
     <script>
-        // Configurações
         const PHOTOS_TOTAL = 85;
         const VIDEOS_TOTAL = 39;
         const ITEMS_PER_PAGE = 20;
         
         let currentPage = 1;
-        let currentTab = 'photos'; // 'photos' ou 'videos'
+        let currentTab = 'photos';
 
         function openChat() {
-            alert('Redirecionando para o chat privado...\n\nAqui você pode configurar um link para WhatsApp, Telegram ou sistema de chat.');
+            alert('Redirecionando para o chat privado...');
         }
 
         function openImageModal(imageSrc) {
             const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                cursor: pointer;
-            `;
-            
+            modal.style.cssText = `position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                                   background: rgba(0,0,0,0.9); display: flex; align-items: center;
+                                   justify-content: center; z-index: 10000; cursor: pointer;`;
             const img = document.createElement('img');
             img.src = imageSrc;
-            img.style.cssText = `
-                max-width: 90%;
-                max-height: 90%;
-                object-fit: contain;
-            `;
-            
+            img.style.cssText = `max-width: 90%; max-height: 90%; object-fit: contain;`;
             modal.appendChild(img);
             document.body.appendChild(modal);
-            
-            modal.addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
+            modal.addEventListener('click', () => document.body.removeChild(modal));
         }
 
         function loadPhotos(page = 1) {
             const grid = document.getElementById('photos-grid');
             const startIndex = (page - 1) * ITEMS_PER_PAGE + 1;
             const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, PHOTOS_TOTAL);
-            
             grid.innerHTML = '';
-            
             for (let i = startIndex; i <= endIndex; i++) {
                 const item = document.createElement('div');
                 item.className = 'content-item';
                 item.innerHTML = `
-                    <img src="Fotos leticia benetto/foto${i}.png" alt="Foto ${i}" class="content-image" onerror="this.onerror=null; this.src='Fotos leticia benetto/foto${i}.jpg';">
+                    <img src="foto${i}.png" alt="Foto ${i}" class="content-image"
+                         onerror="this.onerror=null; this.src='foto${i}.jpg';">
                     <div class="premium-badge">FOTO</div>
                 `;
-                
                 item.addEventListener('click', function() {
                     const img = this.querySelector('img');
                     openImageModal(img.src);
                 });
-                
                 grid.appendChild(item);
             }
-            
             updatePagination();
         }
 
@@ -426,100 +261,38 @@
             const grid = document.getElementById('videos-grid');
             const startIndex = (page - 1) * ITEMS_PER_PAGE + 1;
             const endIndex = Math.min(startIndex + ITEMS_PER_PAGE - 1, VIDEOS_TOTAL);
-            
             grid.innerHTML = '';
-            
             for (let i = startIndex; i <= endIndex; i++) {
                 const item = document.createElement('div');
                 item.className = 'content-item';
                 item.innerHTML = `
-                    <img src="Videos leticia benetto/video${i}.jpeg" alt="Vídeo ${i}" class="content-video" onerror="this.onerror=null; this.src='Videos leticia benetto/video${i}.jpg';">
+                    <img src="video${i}.jpeg" alt="Vídeo ${i}" class="content-video"
+                         onerror="this.onerror=null; this.src='video${i}.jpg';">
                     <button class="play-button">▶</button>
                     <div class="premium-badge">HD</div>
                 `;
-                
                 const playBtn = item.querySelector('.play-button');
                 playBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    // Tentar abrir o vídeo .mp4 correspondente
-                    const videoUrl = `Videos leticia benetto/video${i}.mp4`;
+                    const videoUrl = `video${i}.mp4`;
                     window.open(videoUrl, '_blank');
                 });
-                
                 item.addEventListener('click', function() {
                     const img = this.querySelector('img');
                     openImageModal(img.src);
                 });
-                
                 grid.appendChild(item);
             }
-            
             updatePagination();
         }
 
         function updatePagination() {
             const total = currentTab === 'photos' ? PHOTOS_TOTAL : VIDEOS_TOTAL;
             const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
-            
             document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages}`;
             document.getElementById('prevBtn').disabled = currentPage === 1;
             document.getElementById('nextBtn').disabled = currentPage === totalPages;
         }
 
         function changePage(direction) {
-            const total = currentTab === 'photos' ? PHOTOS_TOTAL : VIDEOS_TOTAL;
-            const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
-            
-            if (direction === 'next' && currentPage < totalPages) {
-                currentPage++;
-            } else if (direction === 'prev' && currentPage > 1) {
-                currentPage--;
-            }
-            
-            if (currentTab === 'photos') {
-                loadPhotos(currentPage);
-            } else {
-                loadVideos(currentPage);
-            }
-        }
-
-        // Event listeners
-        document.getElementById('prevBtn').addEventListener('click', () => changePage('prev'));
-        document.getElementById('nextBtn').addEventListener('click', () => changePage('next'));
-
-        document.querySelectorAll('.tab').forEach((tab, index) => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                const photosGrid = document.getElementById('photos-grid');
-                const videosGrid = document.getElementById('videos-grid');
-                const paginationControls = document.querySelector('.pagination-controls');
-                
-                currentPage = 1; // Reset para primeira página
-                
-                if (index === 0) {
-                    // Aba Fotos
-                    currentTab = 'photos';
-                    photosGrid.style.display = 'grid';
-                    videosGrid.style.display = 'none';
-                    paginationControls.style.display = 'flex';
-                    loadPhotos(1);
-                } else {
-                    // Aba Vídeos
-                    currentTab = 'videos';
-                    photosGrid.style.display = 'none';
-                    videosGrid.style.display = 'grid';
-                    paginationControls.style.display = 'flex';
-                    loadVideos(1);
-                }
-            });
-        });
-
-        // Carregar fotos inicialmente
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPhotos(1);
-        });
-    </script>
-</body>
-</html>
+            const total = currentTab === 'photos' ? PHOTOS_TOTAL : VIDE
